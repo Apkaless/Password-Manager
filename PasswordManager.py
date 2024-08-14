@@ -1,4 +1,3 @@
-
 import hashlib
 import base64
 from threading import Thread
@@ -17,7 +16,6 @@ import json
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 
-
 window = Tk()
 
 window.geometry('920x920')
@@ -30,21 +28,20 @@ window.iconphoto(True, p_ico)
 
 window.resizable(width=False, height=False)
 
-window.config(bg='#6831d6')
+window.config(bg='#0b4457')
 
 window.attributes('-alpha', 0.9)
 
 window.attributes('-disabled',  1)
 
 class addApp:
-    
-    
+
     def __init__(self) -> Tk:
         self.root = Tk()
         self.root.attributes('-topmost', 1)
         self.root.title('Add New App')
         self.root.geometry('400x500+650+500')
-        self.root.config(bg='#6831d6')
+        self.root.config(bg='#0b4457')
         
     def image_resizer_func(self, img, width, height, parent):
         original_image = Image.open(img)
@@ -53,42 +50,26 @@ class addApp:
         return resized_photo 
     
     def save_app(self):
-        
+
         appname = self.appnameEntry.get()
-        
         appicon = self.appiconlabel2['text']
-        
-       
         try:
-            
             with open('applications.json', 'r') as f:
-            
                 jsdata = f.read()
-                
                 jsdata = json.loads(jsdata)
-                
                 key_num = 1
-                
                 while f'app{key_num}' in jsdata:
                     
                     key_num += 1
                     
                 jsdata[f'app{key_num}'] = appname
-                
                 jsdata[f'icon{key_num}'] = appicon
-                
                 f.close()
-                
                 messagebox.showinfo(title='App', message='Application Has Been Added\n\nRestart The App.')
-                
             with open('applications.json', 'w') as f:
-                
-                json.dump(jsdata, f)
-                
-                f.close()
-                
-            self.is_saved = True
-                
+                json.dump(jsdata, f)                
+                f.close()                
+            self.is_saved = True                
         except:
             
             with open('applications.json', 'w') as f:
@@ -110,35 +91,35 @@ class addApp:
         self.icon = filedialog.askopenfilename(title='Select Icon', filetypes=(('jpg', '*.jpg'), ('ico', '*.ico'), ('png', '*.png')))
 
         if self.icon:
-            self.appiconlabel2 = Label(self.root, text=f'{self.icon}', width=50, height=1, bg='#6831d6', fg='white', font=('ubuntu', '12'))
+            self.appiconlabel2 = Label(self.root, text=f'{self.icon}', width=50, height=1, bg='#0b4457', fg='white', font=('ubuntu', '12'))
             self.appiconlabel2.place(relx=0.5, rely=0.6, anchor='center')
     def on_hover(self, e):
-        e.widget.config(bg='white', fg='#6831d6')
+        e.widget.config(bg='white', fg='#0b4457')
     def on_leave(self, e):
-        e.widget.config(bg='#6831d6', fg='white') 
+        e.widget.config(bg='#0b4457', fg='white') 
         
     def add_application(self):
         
         img_browse = self.image_resizer_func('icons/search2.png',40, 40, self.root)
         plus_img = self.image_resizer_func('icons/plus.png',30, 30, self.root)
         logo = self.image_resizer_func('icons/cyber-crime.png',50, 50, self.root)
-        self.appnameLogo = Label(self.root, image=logo, background='#6831d6')
+        self.appnameLogo = Label(self.root, image=logo, background='#0b4457')
         self.appnameLogo.place(relx=0.5, rely=0.1, anchor='center')
-        self.appnamelabel = Label(self.root, text='App Name', width=15, height=1, bg='#6831d6', fg='white', font=('ubuntu', '12'))
+        self.appnamelabel = Label(self.root, text='App Name', width=15, height=1, bg='#0b4457', fg='white', font=('ubuntu', '12'))
         self.appnamelabel.place(relx=0.5, rely=0.2, anchor='center')
         self.appnameEntry = Entry(self.root)
-        self.appnameEntry.config(width=20, bg='#6831d6', fg='white', font=('ubuntu', '12'), relief='flat', bd=1, highlightcolor='white', highlightbackground='white', highlightthickness=1)
+        self.appnameEntry.config(width=20, bg='#0b4457', fg='white', font=('ubuntu', '12'), relief='flat', bd=1, highlightcolor='white', highlightbackground='white', highlightthickness=1)
         self.appnameEntry.place(relx=0.5, rely=0.3, anchor='center')
         
-        self.appiconlabel = Label(self.root, text='App Icon', width=15, height=1, bg='#6831d6', fg='white', font=('ubuntu', '12'))
+        self.appiconlabel = Label(self.root, text='App Icon', width=15, height=1, bg='#0b4457', fg='white', font=('ubuntu', '12'))
         self.appiconlabel.place(relx=0.5, rely=0.4, anchor='center')
         self.appiconButton = Button(self.root)
-        self.appiconButton.config(text='Browse', bg='#6831d6', fg='white', highlightbackground='red', highlightcolor='red', highlightthickness=2, relief='flat', borderwidth=4, bd=1,
+        self.appiconButton.config(text='Browse', bg='#0b4457', fg='white', highlightbackground='red', highlightcolor='red', highlightthickness=2, relief='flat', borderwidth=4, bd=1,
                                   command=self.browse_icon, font=('ubuntu', '12'), image=img_browse, compound='left')
         self.appiconButton.place(relx=0.5, rely=0.5, anchor='center')
         
         self.appButton = Button(self.root)
-        self.appButton.config(text='Add App', bg='#6831d6', fg='white', highlightbackground='white', highlightcolor='white', highlightthickness=2, relief='flat', bd=1,
+        self.appButton.config(text='Add App', bg='#0b4457', fg='white', highlightbackground='white', highlightcolor='white', highlightthickness=2, relief='flat', bd=1,
                                   font=('ubuntu', '12'), command=self.save_app, image=plus_img, compound='left', padx=10)
         
         self.appButton.place(relx=0.5, rely=0.7, anchor='center')
@@ -267,20 +248,20 @@ def new_app_creds(appname):
     newapp_window.resizable(width=False, height=False)
     newapp_window.title(social_key)
     
-    newapp_window.config(bg='#6831d6')
+    newapp_window.config(bg='#0b4457')
     
     update_pass_btn = Button(newapp_window)
     
     show_pass_btn = Button(newapp_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(newapp_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -337,7 +318,7 @@ def unlock_new_apps_button():
 def display_saved_apps(img, appname, dx, frame4):
         img2 = image_resizer(40, 40).resize(img)
         app = Button(frame4)
-        app.config(text=f'{appname}', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', image=img2, relief='flat', compound='left', padx=5, cursor='hand2', font=('Helvetica', 12)
+        app.config(text=f'{appname}', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', image=img2, relief='flat', compound='left', padx=5, cursor='hand2', font=('Helvetica', 12)
                    ,command=lambda: new_app_creds(appname), state='disabled')
         app.image = img2
         app.place(relx=dx, rely=0.4, anchor='center')
@@ -372,7 +353,7 @@ def SetPasswordWindow():
     global set_window
     
     set_window = Tk()
-    set_window.config(bg='#6831d6')
+    set_window.config(bg='#0b4457')
     set_window.geometry('300x400')
     set_window.title('Set Password')
     set_window.resizable(width='False', height='False')
@@ -384,7 +365,7 @@ def SetPasswordWindow():
     
     set_pass_btn = Button(set_window)
 
-    set_pass_btn.config(text='Set Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    set_pass_btn.config(text='Set Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                         command=save_password)
     
     set_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -394,12 +375,12 @@ def LoginWindow():
     global login_window
     global ask_for_pass
     login_window = Tk()
-    login_window.config(bg='#6831d6')
+    login_window.config(bg='#0b4457')
     login_window.geometry('300x400')
     login_window.title('Login')
     login_window.resizable(width='False', height='False')
     login_window.attributes('-topmost', 1)
-    txt = Label(login_window, text='Enter Your Password', font=('Helvetica', 12), bg='#6831d6', fg='white')
+    txt = Label(login_window, text='Enter Your Password', font=('Helvetica', 12), bg='#0b4457', fg='white')
     txt.place(relx=0.5, rely=0.2, anchor='center')
 
     ask_for_pass = Entry(login_window, show='*')
@@ -408,7 +389,7 @@ def LoginWindow():
     
     set_pass_btn = Button(login_window)
 
-    set_pass_btn.config(text='Log in', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    set_pass_btn.config(text='Log in', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                         command=check_password)
     
     set_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -416,7 +397,7 @@ def LoginWindow():
     all_buttons =[ig_btn, tik_btn, yt_btn, dc_btn, git_btn, ea_btn, ubi_btn, epic_btn, tw_btn]
 
     for i in all_buttons:
-        i.config(state='disabled', background='#6831d6', fg='white')
+        i.config(state='disabled', background='#0b4457', fg='white')
     
 def check_password():
 
@@ -436,7 +417,7 @@ def check_password():
         unlock_new_apps_button()
         
         for i in all_buttons:
-            i.config(state='normal', background='#6831d6', fg='white')
+            i.config(state='normal', background='#0b4457', fg='white')
 
 
         else:
@@ -478,7 +459,7 @@ def on_hover(e):
 
 def on_leave(e):
     
-     e.widget.config(bg='#6831d6', fg='white')     
+     e.widget.config(bg='#0b4457', fg='white')     
     
 def show_password():
     
@@ -676,8 +657,8 @@ def update_password():
     update_window.geometry('300x400')
     update_window.resizable(width=False, height=False)
     update_window.title('Insert Password')
-    update_window.config(bg='#6831d6')
-    txt = Label(update_window, text='Enter Your Password', font=('Helvetica', 12), bg='#6831d6', fg='white')
+    update_window.config(bg='#0b4457')
+    txt = Label(update_window, text='Enter Your Password', font=('Helvetica', 12), bg='#0b4457', fg='white')
     txt.place(relx=0.5, rely=0.2, anchor='center')
 
     insert_password_entry = Entry(update_window, relief='flat')
@@ -686,7 +667,7 @@ def update_password():
 
     show_pass_btn = Button(update_window)
 
-    show_pass_btn.config(text='Insert Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    show_pass_btn.config(text='Insert Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                          command=insert_password)
     
     show_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -707,21 +688,21 @@ def instagram_creds():
     ig_window.geometry('300x400')
     ig_window.resizable(width=False, height=False)
     ig_window.title('Instagram')
-    ig_window.config(bg='#6831d6')
+    ig_window.config(bg='#0b4457')
 
     
     update_pass_btn = Button(ig_window)
     
     show_pass_btn = Button(ig_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(ig_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -753,21 +734,21 @@ def tik_creds():
     tik_window.geometry('300x400')
     tik_window.resizable(width=False, height=False)
     tik_window.title('TikTok')
-    tik_window.config(bg='#6831d6')
+    tik_window.config(bg='#0b4457')
     
     
     update_pass_btn = Button(tik_window)
     
     show_pass_btn = Button(tik_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(tik_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -799,7 +780,7 @@ def yt_creds():
     yt_window.geometry('300x400')
     yt_window.resizable(width=False, height=False)
     yt_window.title('YouTube')
-    yt_window.config(bg='#6831d6')
+    yt_window.config(bg='#0b4457')
 
     
     
@@ -807,14 +788,14 @@ def yt_creds():
     
     show_pass_btn = Button(yt_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(yt_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -845,7 +826,7 @@ def git_creds():
     git_window.geometry('300x400')
     git_window.resizable(width=False, height=False)
     git_window.title('Github')
-    git_window.config(bg='#6831d6')
+    git_window.config(bg='#0b4457')
 
     
     
@@ -853,14 +834,14 @@ def git_creds():
     
     show_pass_btn = Button(git_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(git_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -891,21 +872,21 @@ def dc_creds():
     dc_window.geometry('300x400')
     dc_window.resizable(width=False, height=False)
     dc_window.title('Discord')
-    dc_window.config(bg='#6831d6')
+    dc_window.config(bg='#0b4457')
 
     
     update_pass_btn = Button(dc_window)
     
     show_pass_btn = Button(dc_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(dc_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -936,7 +917,7 @@ def ea_creds():
     ea_window.geometry('300x400')
     ea_window.resizable(width=False, height=False)
     ea_window.title('EA App')
-    ea_window.config(bg='#6831d6')
+    ea_window.config(bg='#0b4457')
 
     
     
@@ -944,14 +925,14 @@ def ea_creds():
     
     show_pass_btn = Button(ea_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(ea_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -982,7 +963,7 @@ def epic_creds():
     ep_window.geometry('300x400')
     ep_window.resizable(width=False, height=False)
     ep_window.title('Epic Games')
-    ep_window.config(bg='#6831d6')
+    ep_window.config(bg='#0b4457')
 
     
     
@@ -990,14 +971,14 @@ def epic_creds():
     
     show_pass_btn = Button(ep_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(ep_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -1028,7 +1009,7 @@ def ubi_creds():
     ubi_window.geometry('300x400')
     ubi_window.resizable(width=False, height=False)
     ubi_window.title('Ubisoft')
-    ubi_window.config(bg='#6831d6')
+    ubi_window.config(bg='#0b4457')
 
     
     
@@ -1036,14 +1017,14 @@ def ubi_creds():
     
     show_pass_btn = Button(ubi_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(ubi_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -1074,7 +1055,7 @@ def tw_creds():
     tw_window.geometry('300x400')
     tw_window.resizable(width=False, height=False)
     tw_window.title('Twitch')
-    tw_window.config(bg='#6831d6')
+    tw_window.config(bg='#0b4457')
 
     
     
@@ -1082,14 +1063,14 @@ def tw_creds():
     
     show_pass_btn = Button(tw_window)
 
-    show_pass_btn.config(text='Show Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
+    show_pass_btn.config(text='Show Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12), 
                          command=show_password, state='normal')
     
     show_pass_btn.place(relx=0.5, rely=0.3, anchor='center')
     
     update_pass_btn = Button(tw_window)
     
-    update_pass_btn.config(text='Update Password', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
+    update_pass_btn.config(text='Update Password', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', compound='left',padx=5, cursor='hand2',font=('Helvetica', 12),
                            state='normal', command=update_password)
     
     update_pass_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -1116,18 +1097,18 @@ tikPhoto = resizer.resize('icons/tiktok.png')
 ytPhoto = resizer.resize('icons/youtube.png')
 
 canvas = Canvas(window, width=820, height=820)
-canvas.config(background='#6831d6', relief='flat', highlightbackground='#6831d6', highlightcolor='#6831d6', highlightthickness=3)
+canvas.config(background='#0b4457', relief='flat', highlightbackground='#0b4457', highlightcolor='#0b4457', highlightthickness=3)
 canvas.place(relx=0.5, rely=0.4, anchor='center')
 
 frame = Frame(canvas)
 
-frame.config(bg='#6831d6', width=600, height=200)
+frame.config(bg='#0b4457', width=600, height=200)
 
 frame.place(x=120, rely=0.1)
 
 ig_btn = Button(frame)
 
-ig_btn.config(text='Instagram', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=igPhoto, compound='left',padx=5, cursor='hand2',
+ig_btn.config(text='Instagram', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=igPhoto, compound='left',padx=5, cursor='hand2',
               command=instagram_creds, font=('Helvetica', 12))
 
 ig_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -1135,7 +1116,7 @@ ig_btn.place(relx=0.5, rely=0.5, anchor='center')
 
 tik_btn = Button(frame)
 
-tik_btn.config(text='TikTok', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=tikPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+tik_btn.config(text='TikTok', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=tikPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
               command=tik_creds)
 
 tik_btn.place(relx=0.2, rely=0.5, anchor='center')
@@ -1143,7 +1124,7 @@ tik_btn.place(relx=0.2, rely=0.5, anchor='center')
 
 yt_btn = Button(frame)
 
-yt_btn.config(text='YouTube', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=ytPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+yt_btn.config(text='YouTube', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=ytPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
                command=yt_creds)
 
 yt_btn.place(relx=0.8, rely=0.5, anchor='center')
@@ -1158,13 +1139,13 @@ gitPhoto = resizer.resize('icons/github.png')
 
 frame2 = Frame(canvas)
 
-frame2.config(bg='#6831d6', width=600, height=200)
+frame2.config(bg='#0b4457', width=600, height=200)
 
 frame2.place(x=120, rely=0.3)
 
 dc_btn = Button(frame2)
 
-dc_btn.config(text='Discord', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=dcPhoto, compound='left',padx=5,cursor='hand2', font=('Helvetica', 12),
+dc_btn.config(text='Discord', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=dcPhoto, compound='left',padx=5,cursor='hand2', font=('Helvetica', 12),
                command=dc_creds)
 
 dc_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -1172,7 +1153,7 @@ dc_btn.place(relx=0.5, rely=0.5, anchor='center')
 
 tw_btn = Button(frame2)
 
-tw_btn.config(text='Twitch', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=twPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+tw_btn.config(text='Twitch', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=twPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
                command=tw_creds)
 
 tw_btn.place(relx=0.2, rely=0.5, anchor='center')
@@ -1180,7 +1161,7 @@ tw_btn.place(relx=0.2, rely=0.5, anchor='center')
 
 git_btn = Button(frame2)
 
-git_btn.config(text='Github', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=gitPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+git_btn.config(text='Github', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=gitPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
                command=git_creds)
 
 git_btn.place(relx=0.8, rely=0.5, anchor='center')
@@ -1196,13 +1177,13 @@ ubiPhoto = resizer.resize('icons/ubisoft.png')
 
 frame3 = Frame(canvas)
 
-frame3.config(bg='#6831d6', width=600, height=200)
+frame3.config(bg='#0b4457', width=600, height=200)
 
 frame3.place(x=120, rely=0.5)
 
 epic_btn = Button(frame3)
 
-epic_btn.config(text='Epic Games', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=epicPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+epic_btn.config(text='Epic Games', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=epicPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
                 command=epic_creds)
 
 epic_btn.place(relx=0.5, rely=0.5, anchor='center')
@@ -1210,7 +1191,7 @@ epic_btn.place(relx=0.5, rely=0.5, anchor='center')
 
 ea_btn = Button(frame3)
 
-ea_btn.config(text='Ea App', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=eaPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+ea_btn.config(text='Ea App', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=eaPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
               command=ea_creds)
 
 ea_btn.place(relx=0.2, rely=0.5, anchor='center')
@@ -1218,7 +1199,7 @@ ea_btn.place(relx=0.2, rely=0.5, anchor='center')
 
 ubi_btn = Button(frame3)
 
-ubi_btn.config(text='Ubisoft', background='#6831d6', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#6831d6', relief='flat', image=ubiPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
+ubi_btn.config(text='Ubisoft', background='#0b4457', fg='white', bd='1', highlightthickness='3', highlightcolor='white', highlightbackground='#0b4457', relief='flat', image=ubiPhoto, compound='left',padx=5, cursor='hand2', font=('Helvetica', 12),
                command=ubi_creds)
 
 ubi_btn.place(relx=0.8, rely=0.5, anchor='center')
@@ -1228,12 +1209,12 @@ if __name__ == '__main__':
     apps = []
         
     frame4 = Frame(canvas)
-    frame4.config(bg='#6831d6', width=600, height=200)
+    frame4.config(bg='#0b4457', width=600, height=200)
     frame4.place(x=120, rely=0.7)
 
     add_button_img = image_resizer(100, 100).resize('icons/add_button.png')
     addAppBtn = Button(window, image=add_button_img, compound='center')
-    addAppBtn.config(background='#6831d6', height=100, width=100, relief='flat', activebackground='white', highlightbackground='#6831d6', highlightcolor='#6831d6', highlightthickness=3, bd=1,
+    addAppBtn.config(background='#0b4457', height=100, width=100, relief='flat', activebackground='white', highlightbackground='#0b4457', highlightcolor='#0b4457', highlightthickness=3, bd=1,
                         command=add_app, cursor='hand2')
 
     addAppBtn.place(relx=0.5, rely=0.8, anchor='center', y=60)
